@@ -25,7 +25,7 @@
                 clearTimeout(id);
             };
         $('a').click(function() {
-            $('#carousel ul').prepend('<li><h2>test</h2></li>');
+            $('#carousel ul').prepend('<li><h2>Sunny ...</h2></li>');
             carousel.addPane( );
             //carousel.setPaneDimensions();
 	        console.log(carousel);
@@ -94,7 +94,12 @@
 	        pane_count = panes.length;
 	        current_pane = current_pane + 1;
 	        setPaneDimensions();
-	        this.showPane(current_pane, false);
+	        //this.showPane(current_pane);
+	        var index = Math.max(0, Math.min(current_pane, pane_count-1));
+            current_pane = index;
+
+            var offset = -((100/pane_count)*current_pane);
+            setContainerOffset(offset, false);
         }
 
         function setContainerOffset(percent, animate) {
