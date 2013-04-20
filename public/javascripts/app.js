@@ -1,4 +1,5 @@
 var carousel = new Carousel("#carousel");
+var earth = new Earth("#earth", "#carousel");
 /**
  * requestAnimationFrame and cancel polyfill
  */
@@ -36,6 +37,30 @@ var carousel = new Carousel("#carousel");
     carousel.addPane();
 }());
 
+function Earth(element, touch) {
+	var self = this;
+	element = $(element);
+	touch = $(touch);
+	    function handleHammer(ev) {
+        // disable browser scrolling
+        ev.gesture.preventDefault();
+
+        switch (ev.type) {
+        case 'dragdown':
+        	console.log('dragdown');
+            break;
+
+        case 'swipedown':
+            self.prev();
+            ev.gesture.stopDetect();
+            console.log('swipedown');
+            break;
+        }
+    }
+touch.hammer({
+        drag_lock_to_axis: true
+    })
+        .on("dragdown release", handleHammer);}
 
 /**
  * super simple carousel
