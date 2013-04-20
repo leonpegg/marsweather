@@ -24,6 +24,12 @@
             window.cancelAnimationFrame = function(id) {
                 clearTimeout(id);
             };
+        $('a').click(function() {
+            $('#carousel ul').prepend('<li><h2>test</h2></li>');
+            carousel.addPane( );
+            //carousel.setPaneDimensions();
+	        console.log(carousel);
+        })
     }());
 
 
@@ -50,7 +56,6 @@
          */
         this.init = function() {
             setPaneDimensions();
-
             $(window).on("load resize orientationchange", function() {
                 setPaneDimensions();
                 //updateOffset();
@@ -83,6 +88,14 @@
             setContainerOffset(offset, true);
         };
 
+        this.addPane = function( ) {
+	        container = $(">ul", element);
+	        panes = $(">ul>li", element);
+	        pane_count = panes.length;
+	        current_pane = current_pane + 1;
+	        setPaneDimensions();
+	        this.showPane(current_pane, false);
+        }
 
         function setContainerOffset(percent, animate) {
             container.removeClass("animate");
