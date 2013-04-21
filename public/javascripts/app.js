@@ -247,9 +247,11 @@ function Carousel(element) {
     if ($(this).hasClass('default')){
 	    $('h2.atmo').text('On Sol 231 is was Sunny on Mars');
 	    $('h3.temp').html('Min: -69.47 &#x2103; / Min: 3.05 &#x2103;');
+	    $('img.flame').attr("src", '/images/sun.svg');
     } else {
 	    $('h2.atmo').text('While you are in London');
         $('h3.temp').html('It\'s '+(parseFloat(localweather.main.temp - 273.15) + 33.21).toFixed(2)+' &#x2103; Hotter then Mars');
+	    $('img.flame').attr("src", '/images/flame.svg');
         console.log('earth');
     }
   });
