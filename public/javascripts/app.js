@@ -208,7 +208,7 @@ function Carousel(element) {
 
         case 'release':
             // more then 50% moved, navigate
-            if (Math.abs(ev.gesture.deltaX) > pane_width / 4) {
+            if (Math.abs(ev.gesture.deltaX) > pane_width / 3) {
                 if (ev.gesture.direction == 'right') {
                     self.prev();
                 } else {
@@ -230,25 +230,25 @@ function Carousel(element) {
    $.get('data/latest', function (data) {
 	  console.log(data);
 	  var direction, time, date;
-	  $('.atmo').text(' '+data.report.atmo_opacity+' ');
-	  $('.mintemp').html(' '+parseFloat(((data.report.min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; ');
-	  $('.maxtemp').html(' '+parseFloat(((data.report.max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; ');
-	  switch (data.report.wind_direction) {
+	  $('.atmo').text(' '+data.atmo_opacity+' ');
+	  $('.mintemp').html(' '+parseFloat(((data.min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; ');
+	  $('.maxtemp').html(' '+parseFloat(((data.max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; ');
+	  switch (data.wind_direction) {
 		  case 'N': direction = 'North'; break;
 		  case 'S': direction = 'South'; break;
 		  case 'E': direction = 'East'; break;
 		  case 'W': direction = 'West'; break;
 		  default: direction = ''; break;
 	  }
-	  $('.wind .data h3').text(parseFloat((Math.round(data.report.wind_speed * 3600 / 1610.3*1000)/1000).toFixed(2)) + ' mph ' + direction);
-	  $('.pressure .data h3').text(parseFloat((data.report.pressure / 100).toFixed(2)) + ' hPa');
-	  date = (new Date(data.report.sunrise));
+	  $('.wind .data h3').text(parseFloat((Math.round(data.wind_speed * 3600 / 1610.3*1000)/1000).toFixed(2)) + ' mph ' + direction);
+	  $('.pressure .data h3').text(parseFloat((data.pressure / 100).toFixed(2)) + ' hPa');
+	  date = (new Date(data.sunrise));
 	  time = date.getMinutes();
 	  switch (time) {
 		  case 0: time = '00'; break;
 	  }
 	  $('.sunrise .data h3').text(date.getHours() + ':' + time);
-	  date = (new Date(data.report.sunset));
+	  date = (new Date(data.sunset));
 	  time = date.getMinutes();
 	  switch (time) {
 		  case 0: time = '00'; break;

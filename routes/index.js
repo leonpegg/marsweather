@@ -18,7 +18,7 @@ var b = new Buffer(0);
 			got.on('end', function() {
 				console.log('response ends');
 				var str = b.toString();
-				var data = JSON.parse(str);
+				var data = JSON.parse(str).report;
 				res.end(JSON.stringify(data,false));
 			})
   });
