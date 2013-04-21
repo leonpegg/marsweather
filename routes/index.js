@@ -51,7 +51,7 @@ var b = new Buffer(0);
 			got.on('end', function() {
 				console.log('response ends');
 				var str = b.toString();
-				var data = JSON.parse(str).list;
+				var data = JSON.parse(str).list[0];
 				res.end(JSON.stringify(data,false));
 			})
   });

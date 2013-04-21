@@ -17,9 +17,11 @@ function dataCenter(element) {
     if (Geo.init()) {
 Geo.getCurrentPosition(function(geodata) {
 console.log(geodata);
-	$.get('/data/geo/'+geodata.coords.latitude+'/'+geodata.coords.longitude, function (data) {
-		console.log(JSON.parse(data));
-		localweather = JSON.parse(data);
+	$.get('/data/geo/'+geodata.coords.latitude+'/'+geodata.coords.longitude+'', function (data1) {
+	console.log(data1);
+	localweather = data1;
+		//localweather = JSON.parse(data1.toString());
+		//localweather = $.parseJSON(data1.toString());
 	});
 }, function(e) {
 	console.log("Error " + e.code + ": " + e.message);
