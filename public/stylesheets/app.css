@@ -1,3 +1,6 @@
+*{
+	font-family: 'Nunito', sans-serif;
+}
 /**
  * Gridpak Beta LESS
  *
@@ -190,7 +193,14 @@ body {
   position: relative;
 }
 #carousel li {
-  background: #F8B242;
+  background: #e45527; /* Old browsers */
+background: -moz-linear-gradient(top, #e45527 0%, #f8b242 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e45527), color-stop(100%,#f8b242)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #e45527 0%,#f8b242 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #e45527 0%,#f8b242 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #e45527 0%,#f8b242 100%); /* IE10+ */
+background: linear-gradient(to bottom, #e45527 0%,#f8b242 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e45527', endColorstr='#f8b242',GradientType=0 ); /* IE6-9 */
   float: left;
   overflow: hidden;
   -webkit-transform-style: preserve-3d;
