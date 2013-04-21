@@ -8,13 +8,32 @@ block content
           li#carousel
             ul
               li
-                h2 Sunny
+                .data
+                  h2(style='padding:0;margin:0;') Today the sun is shining on Mars.
+                  img(src="/images/sun.svg", type="image/svg+xml", style="height: 40%;")
+                  h3(style='padding:0;margin:0;') Min: -54°C / Max: 3°C
     .row.buttons
-      .wind wind
-      .pressure pressure
+      .wind
+        .data
+          h2 Wind
+          img(src="/images/wind.svg", type="image/svg+xml", style="height: 40%;")
+          h3 7.2 km/h East
+      .pressure
+        .data
+          h2 Pressure
+          img(src="/images/pressure.svg", type="image/svg+xml", style="height: 40%;")
+          h3 8.89 hPa
     .row.buttons
-      .sunrise sunrise
-      .sunset sunset
+      .sunrise
+        .data
+          h2 Sunrise
+          img(src="/images/sunrise.svg", type="image/svg+xml", style="height: 40%;")
+          h3 6am
+      .sunset
+        .data
+          h2 Sunset
+          img(src="/images/sunset.svg", type="image/svg+xml", style="height: 40%;")
+          h3 5pm
     .row
       .footer 
         a(href='#') add pane

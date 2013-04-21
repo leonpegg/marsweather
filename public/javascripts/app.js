@@ -1,5 +1,13 @@
 var carousel = new Carousel("#carousel");
 var earth = new Earth("#earth", "#carousel");
+
+function dataCenter(element) {
+	$(element).css("top", Math.max(0, (($(element).parent().height() - $(element).outerHeight()) / 2) + 
+                                                $(element).parent().scrollTop()) + "px");
+    $(element).css("left", Math.max(0, (($(element).parent().width() - $(element).outerWidth()) / 2) + 
+                                                $(element).parent().scrollLeft()) + "px");
+}
+
 /**
  * requestAnimationFrame and cancel polyfill
  */
@@ -33,8 +41,19 @@ var earth = new Earth("#earth", "#carousel");
         $('#carousel ul').prepend('<li><h2>Sunny ...</h2></li>');
         carousel.addPane();
     });
+    
     $('#carousel ul').prepend('<li><h2>first dataset ...</h2></li>');
     carousel.addPane();
+    
+    $(window).on("load resize orientationchange", function () {
+      //$('.wind div').css("position","re");
+dataCenter("li .data");
+dataCenter(".wind .data");
+dataCenter(".pressure .data");
+dataCenter(".sunset .data");
+dataCenter(".sunrise .data");
+});
+    
 }());
 
 function Earth(element, touch) {
