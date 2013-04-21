@@ -140,6 +140,11 @@ function Carousel(element) {
 
         var offset = -((100 / pane_count) * current_pane);
         setContainerOffset(offset, true);
+        //console.log(current_pane);
+        $('.wind .data h3').text(jQuery.data($(panes)[current_pane],'wind'));
+        $('.pressure .data h3').text(jQuery.data($(panes)[current_pane],'pressure'));
+        $('.sunrise .data h3').text(jQuery.data($(panes)[current_pane],'sunrise'));
+        $('.sunset .data h3').text(jQuery.data($(panes)[current_pane],'sunset'));
     };
 
     this.addPane = function () {
@@ -263,7 +268,7 @@ function Carousel(element) {
    });
    
       $.get('data/archive', function (data) {
-   	  var atmo, slide;
+   	  var atmo, slide, date, time;
 	  $.each(data, function(i, item) {
 		  	//alert(data[i].sol);
 		  	switch (data[i].atmo_opacity) {
@@ -274,9 +279,41 @@ function Carousel(element) {
 			  		atmo =  ' it was '+data[i].atmo_opacity+' on Mars';
 			  		break;
 		  	}
-		  	slide = $('<li><div class="data"><h2>Sol '+data[i].sol+atmo+'</h2><img src="/images/sun.svg" type="image/svg+xml" style="height: 40%;"/><h3>Min: '+parseFloat(((data[i].min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; / Max: '+parseFloat(((data[i].max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103;</h3></div></li>');
-		  	slide.data('slideno',i);
+		  	slide = $('<li id="slide'+i+'"><div class="data"><h2>Sol '+data[i].sol+atmo+'</h2><img src="/images/sun.svg" type="image/svg+xml" style="height: 40%;"/><h3>Min: '+parseFloat(((data[i].min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; / Max: '+parseFloat(((data[i].max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103;</h3></div></li>');
 		  	$('#carousel ul').prepend(slide);
+		    switch (data[i].wind_direction) {
+			    case 'N': direction = 'North'; break;
+		  		case 'S': direction = 'South'; break;
+		  		case 'E': direction = 'East'; break;
+		  		case 'W': direction = 'West'; break;
+		  		default: direction = ''; break;
+		  	}
+		  	$('#slide'+i).data('wind',parseFloat((Math.round(data[i].wind_speed * 3600 / 1610.3*1000)/1000).toFixed(2)) + ' mph ' + direction);
+		  	if (data[i].pressure > 100) {
+		  	$('#slide'+i).data('pressure',parseFloat((data[i].pressure / 100).toFixed(2)) + ' hPa');
+		  	}else{
+			  	$('#slide'+i).data('pressure',parseFloat(data[i].pressure).toFixed(2) + ' hPa');
+		  	}
+		  	date = (new Date(data[i].sunrise));
+	  time = date.getMinutes();
+	  switch (time) {
+		  case 0: time = '00'; break;
+	  }
+if (data[i].sunrise === null){
+	$('#slide'+i).data('sunrise','Unknown');
+}else{
+		  	$('#slide'+i).data('sunrise',date.getHours() + ':' + time);
+		  	}
+		  			  	date = (new Date(data[i].sunset));
+	  time = date.getMinutes();
+	  switch (time) {
+		  case 0: time = '00'; break;
+	  }
+if (data[i].sunrise === null){
+	$('#slide'+i).data('sunset','Unknown');
+}else{
+		  	$('#slide'+i).data('sunset',date.getHours() + ':' + time);
+}
             carousel.addPane();
     	});
     	dataCenter("li .data");
