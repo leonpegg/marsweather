@@ -38,3 +38,22 @@ var b = new Buffer(0);
 			})
   });
 };
+
+exports.datageo = function (req, res) {
+    lon = req.params.lon;
+    lat = req.params.lat;
+    http.get('http://openweathermap.org/data/2.0/find/station?lat='+lat+'&lon='+lon+'&cnt=10', function (got) {
+var b = new Buffer(0);
+			res.writeHead(200, {'Content-Type': 'application/json'});
+			got.on('data', function(d) {
+				b += d;
+			});
+			got.on('end', function() {
+				console.log('response ends');
+				var str = b.toString();
+				var data = JSON.parse(str).list;
+				res.end(JSON.stringify(data,false));
+			})
+  });
+
+};

@@ -29,6 +29,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/data/latest', routes.datalatest);
 app.get('/data/archive', routes.dataarchive);
+app.get('/data/geo/:lat/:lon', routes.datageo);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -1,5 +1,5 @@
-*{
-	font-family: 'Nunito', sans-serif;
+* {
+	font-family: 'Amaranth', sans-serif;
 }
 /**
  * Gridpak Beta LESS
@@ -65,14 +65,7 @@
   .row.overview {
     height: 50%;
   }
-  .wind,
-  .sunset {
-    background: #b3421a;
-  }
-  .pressure,
-  .sunrise {
-    background: #E45527;
-  }
+
 }
 /* 2. 4 Column Grid 780px - Infinity 
     ----------------------------------------------------------------------------- 
@@ -155,7 +148,8 @@ body {
   height: 100%;
 }
 .footer {
-  background: #01435A;
+  background: #2e1015;
+  color:#943243;
   position: fixed;
   bottom: 0;
   height: 1.5em;
@@ -165,7 +159,7 @@ body {
   display: inline;
 }
 #carousel {
-  background: silver;
+  background: #3b2e2e;
   overflow: hidden;
   width: 100%;
   -webkit-backface-visibility: hidden;
@@ -193,7 +187,7 @@ body {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   position: relative;
 }
-#carousel li {
+.default {
 background: #f8b242; /* Old browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
 background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjEwMCUiIHkyPSIwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjEwJSIgc3RvcC1jb2xvcj0iI2Y4YjI0MiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk3JSIgc3RvcC1jb2xvcj0iI2U0NTUyNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
@@ -204,7 +198,8 @@ background: -o-linear-gradient(45deg,  #f8b242 10%,#e45527 97%); /* Opera 11.10+
 background: -ms-linear-gradient(45deg,  #f8b242 10%,#e45527 97%); /* IE10+ */
 background: linear-gradient(45deg,  #f8b242 10%,#e45527 97%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8b242', endColorstr='#e45527',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
-
+}
+#carousel li {
   float: left;
   overflow: hidden;
   -webkit-transform-style: preserve-3d;
@@ -250,4 +245,29 @@ h3 {
 .row div {
 	position: relative;
 	z-index: 10;
+}
+  .wind {
+	  background: #ed4e2b;
+  }
+  .sunset {
+    background: #471820;
+  }
+  .pressure {
+	  background: #ad3927;
+  }
+  .sunrise {
+    background: #6e2423;
+  }
+.earthback {
+background: #1e5799; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMTAwJSIgeDI9IjEwMCUiIHkyPSIwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMWU1Nzk5IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjMjk4OWQ4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTElIiBzdG9wLWNvbG9yPSIjMjA3Y2NhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzdkYjllOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-linear-gradient(45deg,  #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#1e5799), color-stop(50%,#2989d8), color-stop(51%,#207cca), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(45deg,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(45deg,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(45deg,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* IE10+ */
+background: linear-gradient(45deg,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+
 }

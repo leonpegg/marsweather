@@ -1,5 +1,6 @@
 var carousel = new Carousel("#carousel");
 var earth = new Earth("#earth", "#carousel");
+var localweather;
 
 function dataCenter(element) {
 	$(element).css("top", Math.max(0, (($(element).parent().height() - $(element).outerHeight()) / 2) + 
@@ -13,6 +14,17 @@ function dataCenter(element) {
  */
 (function () {
     carousel.init();
+    if (Geo.init()) {
+Geo.getCurrentPosition(function(geodata) {
+console.log(geodata);
+	$.get('/data/geo/'+geodata.coords.latitude+'/'+geodata.coords.longitude, function (data) {
+		console.log(JSON.parse(data));
+		localweather = JSON.parse(data);
+	});
+}, function(e) {
+	console.log("Error " + e.code + ": " + e.message);
+});
+}
     //earth.init();
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -219,6 +231,27 @@ function Carousel(element) {
 
         case 'release':
             // more then 50% moved, navigate
+            if(Math.abs(ev.gesture.deltaX) < 10) {
+            	//console.log(localweather);
+            	console.log((parseFloat(localweather.main.temp - 273.15)).toFixed(2));
+            	
+            	$("li.latest").fadeOut("fast", function(){
+      $(this)
+    .toggleClass("default")
+    .fadeIn("fast", function(){$(this).css({opacity: 1.0})});
+     $(this)
+    .toggleClass("earthback")
+    .fadeIn("fast", function(){$(this).css({opacity: 1.0})});
+    if ($(this).hasClass('default')){
+	    $('h2.atmo').text('On Sol 231 is was Sunny on Mars');
+	    $('h3.temp').html('Min: -69.47 &#x2103; / Min: 3.05 &#x2103;');
+    } else {
+	    $('h2.atmo').text('While you are in London');
+        $('h3.temp').html('It\'s '+(parseFloat(localweather.main.temp - 273.15) + 33.21).toFixed(2)+' &#x2103; Hotter then Mars');
+        console.log('earth');
+    }
+  });
+            }else{
             if (Math.abs(ev.gesture.deltaX) > pane_width / 3) {
                 if (ev.gesture.direction == 'right') {
                     self.prev();
@@ -227,6 +260,7 @@ function Carousel(element) {
                 }
             } else {
                 self.showPane(current_pane, true);
+            }
             }
             break;
         }
@@ -241,9 +275,13 @@ function Carousel(element) {
    $.get('data/latest', function (data) {
 	  console.log(data);
 	  var direction, time, date;
-	  $('h2.atmo').text('Sol '+data.sol+' it was '+data.atmo_opacity+' on Mars.');
+	  $('h2.atmo').text('On Sol '+data.sol+' it was '+data.atmo_opacity+' on Mars.');
+	  $('.latest').data('atmot', ('On Sol '+data.sol+' it was '+data.atmo_opacity+' on Mars.'));
 	  $('.mintemp').html(' '+parseFloat(((data.min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; ');
 	  $('.maxtemp').html(' '+parseFloat(((data.max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; ');
+	  $('.latest').data('tempt', $('h3.temp').html());
+	  $('.latest').data('mintemp',parseFloat(((data.min_temp_fahrenheit -32) * 5 / 9).toFixed(2)));
+	  $('.latest').data('maxtemp',parseFloat(((data.max_temp_fahrenheit -32) * 5 / 9).toFixed(2)));
 	  switch (data.wind_direction) {
 		  case 'N': direction = 'North'; break;
 		  case 'S': direction = 'South'; break;
@@ -271,13 +309,21 @@ function Carousel(element) {
 		  	}else{
 			  	$('.latest').data('pressure',parseFloat(data.pressure).toFixed(2) + ' hPa');
 		  	}
-
+	  date = (new Date(data.sunrise));
+	  time = date.getMinutes();
+	  switch (time) {
+		  case 0: time = '00'; break;
+	  }
   	  if (data.sunrise === null){
 	$('.latest').data('sunrise','Unknown');
 }else{
 		  	$('.latest').data('sunrise',date.getHours() + ':' + time);
 		  	}
-  	  
+  	  	  date = (new Date(data.sunset));
+	  time = date.getMinutes();
+	  switch (time) {
+		  case 0: time = '00'; break;
+	  }
   	  if (data.sunset === null){
 	$('.latest').data('sunset','Unknown');
 }else{
@@ -300,7 +346,7 @@ function Carousel(element) {
 			  		atmo =  ' it was '+data[i].atmo_opacity+' on Mars';
 			  		break;
 		  	}
-		  	slide = $('<li id="slide'+i+'"><div class="data"><h2>Sol '+data[i].sol+atmo+'</h2><img src="/images/sun.svg" type="image/svg+xml" style="height: 40%;"/><h3>Min: '+parseFloat(((data[i].min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; / Max: '+parseFloat(((data[i].max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103;</h3></div></li>');
+		  	slide = $('<li class="default" id="slide'+i+'"><div class="data"><h2>On Sol '+data[i].sol+atmo+'</h2><img src="/images/sun.svg" type="image/svg+xml" style="height: 40%;"/><h3>Min: '+parseFloat(((data[i].min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; / Max: '+parseFloat(((data[i].max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103;</h3></div></li>');
 		  	$('#carousel ul').prepend(slide);
 		    switch (data[i].wind_direction) {
 			    case 'N': direction = 'North'; break;
