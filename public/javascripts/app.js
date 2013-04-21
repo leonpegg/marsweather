@@ -44,8 +44,31 @@ function dataCenter(element) {
     
     $('#carousel ul').prepend('<li><h2>first dataset ...</h2></li>');
     carousel.addPane();
-    
-    $(window).on("load resize orientationchange", function () {
+   
+   $.get('data/latest', function (data) {
+	  console.log(data);
+	  var direction, time;
+	  switch (data.report.wind_direction) {
+		  case 'N': direction = 'North'; break;
+		  case 'S': direction = 'South'; break;
+		  case 'E': direction = 'East'; break;
+		  case 'W': direction = 'West'; break;
+		  default: direction = ''; break;
+	  }
+	  $('.wind .data h3').text(parseFloat((Math.round(data.report.wind_speed * 3600 / 1610.3*1000)/1000).toFixed(2)) + ' mph ' + direction);
+	  $('.pressure .data h3').text(parseFloat((data.report.pressure / 100).toFixed(2)) + ' hPa');
+	  time = (new Date(data.report.sunrise)).getMinutes();
+	  switch (time) {
+		  case 0: time = '00'; break;
+	  }
+	  $('.sunrise .data h3').text((new Date(data.report.sunrise)).getHours() + ':' + time);
+	  time = (new Date(data.report.sunset)).getMinutes();
+	  switch (time) {
+		  case 0: time = '00'; break;
+	  }
+  	  $('.sunset .data h3').text((new Date(data.report.sunset)).getHours() + ':' + time);
+   });
+        $(window).on("load resize orientationchange", function () {
       //$('.wind div').css("position","re");
 dataCenter("li .data");
 dataCenter(".wind .data");
@@ -53,7 +76,7 @@ dataCenter(".pressure .data");
 dataCenter(".sunset .data");
 dataCenter(".sunrise .data");
 });
-    
+
 }());
 
 function Earth(element, touch) {
