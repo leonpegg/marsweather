@@ -188,7 +188,7 @@ body {
   -webkit-transform-style: preserve-3d;
 }
 #carousel ul {
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  /*-webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);*/
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   position: relative;
 }
@@ -238,7 +238,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8b242', end
 h1, h2, h3 {
 	padding: 0;
 	margin:0;
-	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2);
+	/*text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2);*/
 }
 .data {
 	position: relative;
