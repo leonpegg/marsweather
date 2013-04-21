@@ -9,9 +9,14 @@ block content
             ul
               li
                 .data
-                  h2(style='padding:0;margin:0;') Today it is  on Mars.
+                  h2(style='padding:0;margin:0;') Today it is
+                    span.atmo &nbsp;
+                    | on Mars.
                   img(src="/images/sun.svg", type="image/svg+xml", style="height: 40%;")
-                  h3(style='padding:0;margin:0;') Min: -54°C / Max: 3°C
+                  h3(style='padding:0;margin:0;') Min:
+                    span.mintemp 
+                    | / Max: 
+                    span.maxtemp 
     .row.buttons
       .wind
         .data
@@ -35,5 +40,4 @@ block content
           img(src="/images/sunset.svg", type="image/svg+xml", style="height: 40%;")
           h3 &nbsp;
     .row
-      .footer 
-        a(href='#') add pane
+      .footer Designed &amp; Developed by Team M
