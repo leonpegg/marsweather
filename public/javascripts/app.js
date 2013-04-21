@@ -207,7 +207,7 @@ function Carousel(element) {
 
         case 'release':
             // more then 50% moved, navigate
-            if (Math.abs(ev.gesture.deltaX) > pane_width / 2) {
+            if (Math.abs(ev.gesture.deltaX) > pane_width / 4) {
                 if (ev.gesture.direction == 'right') {
                     self.prev();
                 } else {
