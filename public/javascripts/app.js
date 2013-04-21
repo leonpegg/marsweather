@@ -265,11 +265,32 @@ function Carousel(element) {
 		  case 0: time = '00'; break;
 	  }
   	  $('.sunset .data h3').text(date.getHours() + ':' + time);
+  	  $('.latest').data('wind', parseFloat((Math.round(data.wind_speed * 3600 / 1610.3*1000)/1000).toFixed(2)) + ' mph ' + direction);
+  	  if (data.pressure > 100) {
+		  	$('.latest').data('pressure',parseFloat((data.pressure / 100).toFixed(2)) + ' hPa');
+		  	}else{
+			  	$('.latest').data('pressure',parseFloat(data.pressure).toFixed(2) + ' hPa');
+		  	}
+
+  	  if (data.sunrise === null){
+	$('.latest').data('sunrise','Unknown');
+}else{
+		  	$('.latest').data('sunrise',date.getHours() + ':' + time);
+		  	}
+  	  
+  	  if (data.sunset === null){
+	$('.latest').data('sunset','Unknown');
+}else{
+		  	$('.latest').data('sunset',date.getHours() + ':' + time);
+		  	}
+  	 
    });
    
       $.get('data/archive', function (data) {
    	  var atmo, slide, date, time;
+   	  
 	  $.each(data, function(i, item) {
+	  if (i != 0) {
 		  	//alert(data[i].sol);
 		  	switch (data[i].atmo_opacity) {
 			  	case null:
@@ -315,6 +336,8 @@ if (data[i].sunrise === null){
 		  	$('#slide'+i).data('sunset',date.getHours() + ':' + time);
 }
             carousel.addPane();
+            }
     	});
     	dataCenter("li .data");
+    	
    });
