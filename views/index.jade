@@ -5,16 +5,14 @@ block content
     .row.overview
       #earth.overview
         ul
-          // li (Add Earth geo data for comparision)
+          // li(style='background:blue;margin:0;padding:0;') (Add Earth geo data for comparision)
           li#carousel
-            ul
+            ul(style='margin-top:-1.3em')
               li
                 .data
-                  h2(style='padding:0;margin:0;') Today it is
-                    span.atmo &nbsp;
-                    | on Mars.
+                  h2.atmo &nbsp;
                   img(src="/images/sun.svg", type="image/svg+xml", style="height: 40%;")
-                  h3(style='padding:0;margin:0;') Min:
+                  h3 Min:
                     span.mintemp 
                     | / Max: 
                     span.maxtemp 

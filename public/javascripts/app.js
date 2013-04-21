@@ -13,6 +13,7 @@ function dataCenter(element) {
  */
 (function () {
     carousel.init();
+    //earth.init();
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -37,14 +38,9 @@ function dataCenter(element) {
         window.cancelAnimationFrame = function (id) {
             clearTimeout(id);
     };
-    $('a').click(function () {
-        $('#carousel ul').prepend('<li><h2>Sunny ...</h2></li>');
-        carousel.addPane();
-    });
     
-    $('#carousel ul').prepend('<li><h2>first dataset ...</h2></li>');
-    carousel.addPane();
-   
+    //$('#carousel ul').prepend('<li><h2>first dataset ...</h2></li>');
+    //carousel.addPane();
 
         $(window).on("load resize orientationchange", function () {
       //$('.wind div').css("position","re");
@@ -61,6 +57,9 @@ function Earth(element, touch) {
 	var self = this;
 	element = $(element);
 	touch = $(touch);
+	current = 0;
+	panes = 2;
+
 	    function handleHammer(ev) {
         // disable browser scrolling
         ev.gesture.preventDefault();
@@ -68,8 +67,15 @@ function Earth(element, touch) {
         switch (ev.type) {
         case 'dragdown':
         	console.log('dragdown');
+        	console.log(ev.gesture.deltaY);
+        	px = (($('>ul>li',element).height / panes) / 100) * ev.gesture.deltaY;
+            element.css("top", ev.gesture.deltaY + "px");
             break;
-
+        case 'dragup':
+            console.log('dragup');
+            var px = ((element.height * 1) / 100) * ev.gesture.deltaY;
+            element.css("top", ev.gesture.deltaY + "px");
+            break;
         case 'swipedown':
             self.prev();
             ev.gesture.stopDetect();
@@ -77,10 +83,10 @@ function Earth(element, touch) {
             break;
         }
     }
-touch.hammer({
+/*element.hammer({
         drag_lock_to_axis: true
     })
-        .on("dragdown release", handleHammer);}
+        .on("dragdown dragup release", handleHammer);*/}
 
 /**
  * super simple carousel
@@ -230,7 +236,7 @@ function Carousel(element) {
    $.get('data/latest', function (data) {
 	  console.log(data);
 	  var direction, time, date;
-	  $('.atmo').text(' '+data.atmo_opacity+' ');
+	  $('h2.atmo').text('Sol '+data.sol+' it was '+data.atmo_opacity+' on Mars.');
 	  $('.mintemp').html(' '+parseFloat(((data.min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; ');
 	  $('.maxtemp').html(' '+parseFloat(((data.max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; ');
 	  switch (data.wind_direction) {
@@ -254,4 +260,24 @@ function Carousel(element) {
 		  case 0: time = '00'; break;
 	  }
   	  $('.sunset .data h3').text(date.getHours() + ':' + time);
+   });
+   
+      $.get('data/archive', function (data) {
+   	  var atmo, slide;
+	  $.each(data, function(i, item) {
+		  	//alert(data[i].sol);
+		  	switch (data[i].atmo_opacity) {
+			  	case null:
+			  		atmo = '';
+			  		break;
+			  	default:
+			  		atmo =  ' it was '+data[i].atmo_opacity+' on Mars';
+			  		break;
+		  	}
+		  	slide = $('<li><div class="data"><h2>Sol '+data[i].sol+atmo+'</h2><img src="/images/sun.svg" type="image/svg+xml" style="height: 40%;"/><h3>Min: '+parseFloat(((data[i].min_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103; / Max: '+parseFloat(((data[i].max_temp_fahrenheit -32) * 5 / 9).toFixed(2)) + ' &#x2103;</h3></div></li>');
+		  	slide.data('slideno',i);
+		  	$('#carousel ul').prepend(slide);
+            carousel.addPane();
+    	});
+    	dataCenter("li .data");
    });

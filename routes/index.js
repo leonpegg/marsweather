@@ -8,7 +8,6 @@ exports.index = function(req, res){
 };
 
 exports.datalatest = function(req, res){
-
   http.get('http://marsweather.ingenology.com/v1/latest/', function (got) {
 var b = new Buffer(0);
 			res.writeHead(200, {'Content-Type': got.headers['content-type'] || 'application/json'});
@@ -19,6 +18,22 @@ var b = new Buffer(0);
 				console.log('response ends');
 				var str = b.toString();
 				var data = JSON.parse(str).report;
+				res.end(JSON.stringify(data,false));
+			})
+  });
+};
+
+exports.dataarchive = function(req, res){
+  http.get('http://marsweather.ingenology.com/v1/archive/', function (got) {
+var b = new Buffer(0);
+			res.writeHead(200, {'Content-Type': got.headers['content-type'] || 'application/json'});
+			got.on('data', function(d) {
+				b += d;
+			});
+			got.on('end', function() {
+				console.log('response ends');
+				var str = b.toString();
+				var data = JSON.parse(str).results;
 				res.end(JSON.stringify(data,false));
 			})
   });
