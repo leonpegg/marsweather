@@ -7,6 +7,10 @@ exports.index = function(req, res){
   res.render('index');
 };
 
+exports.v2 = function(req, res){
+  res.render('index2');
+};
+
 exports.datalatest = function(req, res){
   http.get('http://marsweather.ingenology.com/v1/latest/', function (got) {
 var b = new Buffer(0);

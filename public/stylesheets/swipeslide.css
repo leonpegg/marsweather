@@ -1,0 +1,52 @@
+/* do not edit those lines */
+.ui-swipeslide,
+.ui-swipeslide-reel,
+.ui-swipeslide-slide {
+  width: 100%;
+  display: block;
+}
+.ui-swipeslide {
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+}
+.ui-swipeslide-reel {
+  -webkit-transform: translate3d(0,0,0);
+  overflow: hidden;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+}
+.ui-swipeslide-vertical .ui-swipeslide-reel {
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+}
+.ui-swipeslide-slide {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* 3d */
+.ui-swipeslide-3d {
+  -webkit-perspective: 1000;
+  position: relative;
+  overflow:visible;
+}
+.ui-swipeslide-3d .ui-swipeslide-reel {
+  -webkit-transform-style: preserve-3d;
+  position: relatve;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.ui-swipeslide-3d .ui-swipeslide-slide {
+  position: absolute;
+}
+/* end not editable styles */  

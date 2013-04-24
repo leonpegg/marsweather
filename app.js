@@ -27,6 +27,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/v2', routes.v2);
 app.get('/data/latest', routes.datalatest);
 app.get('/data/archive', routes.dataarchive);
 app.get('/data/geo/:lat/:lon', routes.datageo);
